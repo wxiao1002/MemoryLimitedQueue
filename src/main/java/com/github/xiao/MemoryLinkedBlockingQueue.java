@@ -1,5 +1,6 @@
 package com.github.xiao;
 
+import java.lang.instrument.Instrumentation;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
@@ -13,9 +14,10 @@ public class MemoryLinkedBlockingQueue<E> extends LinkedBlockingQueue<E> {
 
     private final MemoryLimiter memoryLimiter;
 
-    public MemoryLinkedBlockingQueue(int capacity) {
+
+    public MemoryLinkedBlockingQueue(int capacity,Instrumentation instrumentation) {
         super();
-        this.memoryLimiter = null;
+        this.memoryLimiter = new MemoryLimiter(capacity,instrumentation);
     }
 
     @Override
